@@ -1,6 +1,7 @@
 
-
 # Blind Source Separation Note
+
+
 
 ## Aux IVA
 
@@ -19,8 +20,7 @@ The algorithm in the determined case, i.e., when the number of sources is equal 
 ### Original objective function of IVA
 
 $$
-J(\mathbf{W})=\sum_{k=1}^K \frac{1}{N_\tau}\sum_{\tau=1}^{N_\tau}G(\mathbf{y}_k(\tau))-\sum_{w=1}^{N_w}log|\det W(w)| 
-\\~\\
+J(\mathbf{W})=\sum_{k=1}^K \frac{1}{N_\tau}\sum_{\tau=1}^{N_\tau}G(\mathbf{y}_k(\tau))-\sum_{w=1}^{N_w}log|\det W(w)| \cr
 \mathbf y_k(\tau) = (y_k(1,\tau)\cdots y_k(N_w, \tau))^t
 $$
 
@@ -30,18 +30,15 @@ G(\mathbf{y}_k(\tau)) = -\log p(\mathbf{y}_k(\tau))
 $$
 while doing blind source separation, the distribution of $\mathbf y_k(\tau)$ (the representation of a multivariate p.d.f. of sources) is given as prior, for example in `pyroomacoustic`, there are *Laplace* and *Gauss* distributions to choose. then considering this spherical contrast functions:
 $$
-G(\mathbf{y}_k) = G_R(r_k) 
-\\~\\
+G(\mathbf{y}_k) = G_R(r_k) \cr
 r_k = ||\mathbf{y}_k||_2=\sqrt{\sum_{w=1}^{N_w}|y_k(w)|^2}
 $$
 
 ### Original updating rule
 
 $$
-W(w) \larr W(w) + \mu(I-E[\phi_w(y) y^h(w) ])W(w) 
-\\~\\
-\phi_w(y) = (\phi_{1w}(y_1), \dots, \phi_{kw}(y_k))^t
-\\~\\
+W(w) \larr W(w) + \mu(I-E[\phi_w(y) y^h(w) ])W(w) \cr
+\phi_w(y) = (\phi_{1w}(y_1), \dots, \phi_{kw}(y_k))^t\cr
 \phi_{kw}(y_k)=\frac{\partial G(y_k)}{\partial y_k^\star(w)}
 $$
 where $\phi_{kw}(y_k)$ is called *natural gradient*.
@@ -76,7 +73,7 @@ where $G_R(r)$ is a continuous and differentiable function *(see [above](#origin
 Note: in several literature, the contrast functions may as:
 $$
 \begin{aligned}
-G_1(z) &= C\cdot ||z||_2\\
+G_1(z) &= C\cdot ||z||_2\cr
 G_2(z) &= m\cdot \log\cosh (C\cdot||z||_2)
 \end{aligned}
 $$
@@ -96,7 +93,7 @@ $$
 
 >For any $ G(z) = G_R(||z||_2) \in S_G$,  let
 >$$
->Q(W, V)=\sum_{w=1}^{N_w} Q_w(W(w), \mathbf V(w)) \\
+>Q(W, V)=\sum_{w=1}^{N_w} Q_w(W(w), \mathbf V(w)) \cr
 >Q_w(W(w), \mathbf V(w)) = \frac{1}{2} \sum_{k=1}^K \mathbf w_k^h(w)V_k(w)\mathbf w_k(w) - \log|\det W(w)|+R
 >$$
 >where
@@ -119,8 +116,8 @@ This function computes the frequency-domain filter that minimizes the squared er
 ***Frobenius norm***  sometimes also called the Euclidean norm (a term unfortunately also used for the vector $L^2$ norm), is matrix norm of an $m\times n$ matrix $A$, defined as $||A||_F$:
 $$
 \begin{aligned}
-||A||_F &= [\sum_{i,j}abs(a_{i,j})^2]^{\frac{1}{2}} \\
-&= \sqrt{\sum_{i=1}^m\sum_{j=1}^n|A_{i,j}|^2} \\
+||A||_F &= [\sum_{i,j}abs(a_{i,j})^2]^{\frac{1}{2}} \cr
+&= \sqrt{\sum_{i=1}^m\sum_{j=1}^n|A_{i,j}|^2} \cr
 &= \sqrt{\text{Tr}(AA^h)}
 \end{aligned}
 $$
@@ -137,8 +134,8 @@ $$
 $$
 d_\beta(x|y)\xlongequal{\text{def}}
 \begin{cases}
-\frac{1}{\beta(\beta-1)}(x^\beta+(\beta-1)y^\beta-\beta xy^{\beta-1}) & \beta \in \mathcal{R}\and(x\neq0,1)\\
-x\log\frac{x}{y}-x+y=d_\text{KL}(x|y) & \beta = 1\\
+\frac{1}{\beta(\beta-1)}(x^\beta+(\beta-1)y^\beta-\beta xy^{\beta-1}) & \beta \in \mathcal{R}\and(x\neq0,1)\cr
+x\log\frac{x}{y}-x+y=d_\text{KL}(x|y) & \beta = 1\cr
 \frac{x}{y}-\log\frac{x}{y}-1=d_\text{IS}(x|y) & \beta =0
 \end{cases}
 $$
@@ -160,10 +157,8 @@ $$
 #### Log-likelihood function
 $$
 \begin{aligned}
-\log p_\theta(s) &= \log \int q_\phi (\mathbf{z|s})\frac{p_\theta(\mathbf{s|z})p(\mathbf{z})}{q_\phi(\mathbf{z|s})} d \mathbf{z}
-\\~\\
-&\ge \int q_\phi (\mathbf{z|s})\log\frac{p_\theta(\mathbf{s|z})p(\mathbf{z})}{q_\phi(\mathbf{z|s})} d \mathbf{z}
-\\~\\
+\log p_\theta(s) &= \log \int q_\phi (\mathbf{z|s})\frac{p_\theta(\mathbf{s|z})p(\mathbf{z})}{q_\phi(\mathbf{z|s})} d \mathbf{z}\cr
+&\ge \int q_\phi (\mathbf{z|s})\log\frac{p_\theta(\mathbf{s|z})p(\mathbf{z})}{q_\phi(\mathbf{z|s})} d \mathbf{z}\cr
 &= \mathbb{E}_{\mathbf{z}\sim q_\phi (\mathbf{z|s})}[\log q_\phi(\mathbf{z|s})]-\text{KL}(q_\phi (\mathbf{z|s})\|p(\mathbf{z}))
 \end{aligned}
 $$
@@ -219,7 +214,7 @@ where the Fourier transform ${\bf a}_j(f)$ of the mixing filters, *actually the 
 $$
 {\bf a}_j(f)=
 \begin{pmatrix}
-\kappa_{1,j}e^{-2i\pi f\tau _{1,j}}\\ \vdots \\ \kappa_{I,j}e^{-2i\pi f\tau _{I,j}}
+\kappa_{1,j}e^{-2i\pi f\tau _{1,j}}\cr \vdots \cr \kappa_{I,j}e^{-2i\pi f\tau _{I,j}}
 \end{pmatrix}
 $$
 
@@ -251,8 +246,8 @@ $$
 
 - $\beta$ the wall reflection coefficient computed from the room reverberation time $T_{60}$ via Eyring's formula:
 
-$$
-  \beta=\exp \left\{-{13.82 \over \left({1 \over L_x}+{1 \over L_y}+{1 \over L_z}\right)cT_{60}}\right\}
+- $$
+  \beta=\exp\left\{-{13.82 \over \left({1 \over L_x}+{1 \over L_y}+{1 \over L_z}\right)cT_{60}}\right\}
   $$
 
 #### Full-Rank Unconstrained Model
@@ -266,8 +261,8 @@ is valid on average when considering a large number of sources distributed at di
 Therefore, we also investigate the modeling of each source via a full-rank unconstrained spatial covariance matrix Rj(f) whose coefficients are unrelated a priori. This model is the most general possible model for a covariance matrix. It generalizes the above three models in the sense that any matrix taking the form of
 $$
 \begin{aligned}
-{\bf R}_j(f)&={\bf h}_j(f){\bf h}_j^H(f)\\
-{\bf R}_j(f)&={\bf a}_j(f){\bf a}_j^H(f)\\
+{\bf R}_j(f)&={\bf h}_j(f){\bf h}_j^H(f)\cr
+{\bf R}_j(f)&={\bf a}_j(f){\bf a}_j^H(f)\cr
 {\bf R}_j(f)&={\bf a}_j(f){\bf a}_j^H(f) +\sigma_{\rm rev}^2{\bf \Psi}(f)
 \end{aligned}
 $$
@@ -326,8 +321,8 @@ where ${\bf X}_{ft}\stackrel{\text{def}}{=}{\bf x}_{ft}{\bf x}_{ft}^H$ denotes t
 ***Closed-form update rule of ${\bf G}$***
 $$
 \begin{aligned}
-{\bf A}_{nf}&\stackrel{\text{def}}{=} \sum_{t=1}^T\lambda_{ftn}{\bf Y}_{ft}^{-1}{\bf X}_{ft}{\bf Y}_{ft}^{-1},\\
-{\bf B}_{nf}&\stackrel{\text{def}}{=} \sum_{t=1}^T\lambda_{ftn}{\bf Y}_{ft}^{-1},\\
+{\bf A}_{nf}&\stackrel{\text{def}}{=} \sum_{t=1}^T\lambda_{ftn}{\bf Y}_{ft}^{-1}{\bf X}_{ft}{\bf Y}_{ft}^{-1},\cr
+{\bf B}_{nf}&\stackrel{\text{def}}{=} \sum_{t=1}^T\lambda_{ftn}{\bf Y}_{ft}^{-1},\cr
 {\bf G}_{nf}&\larr{\bf B}_{nf}^{-1}({\bf B}_{nf}{\bf G}_{nf}{\bf A}_{nf}{\bf G}_{nf})^{\frac{1}{2}}
 \end{aligned}
 $$
@@ -351,7 +346,7 @@ $$
 $$
 Using **MM** algorithm and **MU** rules for $W$ and $H$ are given by:
 $$
-\omega_{nkf}\larr \omega_{nkf}\sqrt{\frac{\sum_{t=1}^{T}h_{nkt}\text{tr}\left({\bf G}_{ft}{\bf Y}_{ft}^{-1}{\bf X}_{ft}{\bf Y}_{ft}^{-1}\right)}{{\sum_{t=1}^{T}h_{nkt}\text{tr}\left({\bf G}_{ft}{\bf Y}_{ft}^{-1}\right)}}}\\
+\omega_{nkf}\larr \omega_{nkf}\sqrt{\frac{\sum_{t=1}^{T}h_{nkt}\text{tr}\left({\bf G}_{ft}{\bf Y}_{ft}^{-1}{\bf X}_{ft}{\bf Y}_{ft}^{-1}\right)}{{\sum_{t=1}^{T}h_{nkt}\text{tr}\left({\bf G}_{ft}{\bf Y}_{ft}^{-1}\right)}}}\cr
 h_{nkf}\larr h_{nkf}\sqrt{\frac{\sum_{f=1}^{F}\omega_{nkf}\text{tr}\left({\bf G}_{ft}{\bf Y}_{ft}^{-1}{\bf X}_{ft}{\bf Y}_{ft}^{-1}\right)}{{\sum_{f=1}^{F}\omega_{nkf}\text{tr}\left({\bf G}_{ft}{\bf Y}_{ft}^{-1}\right)}}}
 $$
 
@@ -369,14 +364,14 @@ $$
 
 To update the latent variables ${\bf Z}_n=\{{\bf z}_{nt}\}_{t=1}^T$, we use Metropolis sampling[^MetropolisSampling]. A proposal ${\bf z}_{nt}^\text{new}\sim\mathcal{N}({\bf z}_{nt}^\text{old}, \epsilon I)$ is accepted with probability $\min (1, \gamma_{nt})$, where $\gamma_{nt}$ is given by:
 $$
-\log \gamma_{n t}=-\sum_{f=1}^{F}\left(\frac{1}{\lambda_{f t n}^{\text {new }}}-\frac{1}{\lambda_{f t n}^{\text {old }}}\right) \operatorname{tr}\left(\mathbf{G}_{n f} \mathbf{Y}_{f t}^{-1} \mathbf{X}_{f t} \mathbf{Y}_{f t}^{-1}\right) \\ -\sum_{f=1}^{F}\left(\lambda_{f t n}^{\text {new }}-\lambda_{f t n}^{\text {old }}\right) \operatorname{tr}\left(\mathbf{G}_{n f} \mathbf{Y}_{f t}^{-1}\right)
+\log \gamma_{n t}=-\sum_{f=1}^{F}\left(\frac{1}{\lambda_{f t n}^{\text {new }}}-\frac{1}{\lambda_{f t n}^{\text {old }}}\right) \operatorname{tr}\left(\mathbf{G}_{n f} \mathbf{Y}_{f t}^{-1} \mathbf{X}_{f t} \mathbf{Y}_{f t}^{-1}\right) \cr -\sum_{f=1}^{F}\left(\lambda_{f t n}^{\text {new }}-\lambda_{f t n}^{\text {old }}\right) \operatorname{tr}\left(\mathbf{G}_{n f} \mathbf{Y}_{f t}^{-1}\right)
 $$
 where $\lambda_{ftn}^\text{new/old}=u_{nf}v_{nt}[\sigma_{\theta}^{2}(\mathrm{z}_{nt}^\text{new/old})]_{f}$. *In practice*, we update $\mathrm{Z}_n$ several times without updating $\mathrm{Y}_{ft}$ to reduce the computational cost of calculating the inverse.
 
 In the same way as the NMF-based source model, the MU rules of $U$ and $V$ are given by
 $$
 u_{n f} \leftarrow u_{n f} \sqrt{\frac{\sum_{t=1}^{T} v_{n t} r_{n t f} \operatorname{tr}\left(\mathbf{G}_{n f} \mathbf{Y}_{f t}^{-1} \mathbf{X}_{f t} \mathbf{Y}_{f t}^{-1}\right)}{\sum_{t=1}^{T} v_{n t} r_{n t f} \operatorname{tr}\left(\mathbf{G}_{n f} \mathbf{Y}_{f t}^{-1}\right)}}
-\\~\\
+\cr
 v_{n t} \leftarrow v_{n t} \sqrt{\frac{\sum_{f=1}^{F} u_{n f} r_{n t f} \operatorname{tr}\left(\mathbf{G}_{n f} \mathbf{Y}_{f t}^{-1} \mathbf{X}_{f t} \mathbf{Y}_{f t}^{-1}\right)}{\sum_{f=1}^{F} u_{n f} r_{n t f} \operatorname{tr}\left(\mathbf{G}_{n f} \mathbf{Y}_{f t}^{-1}\right)}}
 $$
 
@@ -402,7 +397,6 @@ MNMF[^MNMF] is obtained by integrating the NMF-based source model into FCA.
 MNMF-DP[^MNMF-DP] specialized for speech enhancement is obtained by integrating the full-rank spatial model and the DNN and NMF-based source models representing speech and noise sources, respectively. Assuming a source indexed by $n = 1$ corresponds to the speech, $\lambda_{ft,1}$ and $\lambda_{ft,n},(n\ge2)$ are given by $\text{(for speech)}$ and $\text{(for noise and music)}$, respectively.
 
 [^MNMF-DP]: K. Sekiguchi et al., "Bayesian multichannel speech enhancement with a deep speech prior", *APSIPA*, pp. 1233-1239, 2018.
-
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NjY1OTI4NDZdfQ==
+eyJoaXN0b3J5IjpbLTY5NzM4MzQzOF19
 -->
