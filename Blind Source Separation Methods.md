@@ -134,7 +134,7 @@ $$
 $$
 d_\beta(x|y)\xlongequal{\text{def}}
 \begin{cases}
-\frac{1}{\beta(\beta-1)}(x^\beta+(\beta-1)y^\beta-\beta xy^{\beta-1}) & \beta \in \mathcal{R}\and(x\neq0,1)\cr
+\frac{1}{\beta(\beta-1)}(x^\beta+(\beta-1)y^\beta-\beta xy^{\beta-1}) & \beta \in \mathcal{R}\quad{\rm and}\quad (x\neq0,1)\cr
 x\log\frac{x}{y}-x+y=d_\text{KL}(x|y) & \beta = 1\cr
 \frac{x}{y}-\log\frac{x}{y}-1=d_\text{IS}(x|y) & \beta =0
 \end{cases}
@@ -398,5 +398,5 @@ MNMF-DP[^MNMF-DP] specialized for speech enhancement is obtained by integrating 
 
 [^MNMF-DP]: K. Sekiguchi et al., "Bayesian multichannel speech enhancement with a deep speech prior", *APSIPA*, pp. 1233-1239, 2018.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY5NzM4MzQzOF19
+eyJoaXN0b3J5IjpbNzYwODgzMjcxXX0=
 -->
