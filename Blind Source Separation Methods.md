@@ -37,9 +37,11 @@ $$
 ### Original updating rule
 
 $$
-W(w) \larr W(w) + \mu(I-E[\phi_w(y) y^h(w) ])W(w) \cr
-\phi_w(y) = (\phi_{1w}(y_1), \dots, \phi_{kw}(y_k))^t\cr
-\phi_{kw}(y_k)=\frac{\partial G(y_k)}{\partial y_k^\star(w)}
+\begin{aligned}
+W(w) &\larr W(w) + \mu(I-E[\phi_w(y) y^h(w) ])W(w) \cr
+\phi_w(y) &= (\phi_{1w}(y_1), \dots, \phi_{kw}(y_k))^t \cr
+\phi_{kw}(y_k) &= \frac{\partial G(y_k)}{\partial y_k^\star(w)}
+\end{aligned}
 $$
 where $\phi_{kw}(y_k)$ is called *natural gradient*.
 
@@ -246,8 +248,8 @@ $$
 
 - $\beta$ the wall reflection coefficient computed from the room reverberation time $T_{60}$ via Eyring's formula:
 
-- $$
-  \beta=\exp\left\{-{13.82 \over \left({1 \over L_x}+{1 \over L_y}+{1 \over L_z}\right)cT_{60}}\right\}
+$$
+\beta=\exp\left\{-{13.82 \over \left({1 \over L_x}+{1 \over L_y}+{1 \over L_z}\right)cT_{60}}\right\}
   $$
 
 #### Full-Rank Unconstrained Model
@@ -398,5 +400,5 @@ MNMF-DP[^MNMF-DP] specialized for speech enhancement is obtained by integrating 
 
 [^MNMF-DP]: K. Sekiguchi et al., "Bayesian multichannel speech enhancement with a deep speech prior", *APSIPA*, pp. 1233-1239, 2018.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzYwODgzMjcxXX0=
+eyJoaXN0b3J5IjpbMTYxMDkxNjgxNl19
 -->
